@@ -1,0 +1,88 @@
+#cloud-config
+
+# Update apt database on first boot
+package_update: true
+
+# Upgrade the instance on first boot
+package_upgrade: true
+
+# Install additional packages on first boot
+packages:
+ - apt-listchanges
+ - apt-transport-https
+ - bc
+ - bind9
+ - bind9-dnsutils
+ - bind9-doc
+ - bind9-host
+ - bind9utils
+ - bzip2
+ - ca-certificates
+ - curl
+ - dnsutils
+ - fdisk
+ - git
+ - gnupg
+ - htop
+ - jq
+ - less
+ - lsb-release
+ - lsof
+ - mailutils
+ - mariadb-client
+ - mcrypt
+ - multitail
+ - netcat-openbsd
+ - nvme-cli
+ - parted
+ - patch
+ - postfix
+ - python3-pip
+ - rsync
+ - screen
+ - tcpdump
+ - tmux
+ - unattended-upgrades
+ - unzip
+ - uuid-runtime
+ - vim
+ - zip
+
+# Set up swap space
+swap:
+  filename: /var/swap.img
+  size: "auto"
+
+  # Create/update system users
+users:
+  - default
+  - name: admin
+
+# Files that are required for deployment and ongoing system operation
+write_files:
+  - path: /etc/skel/.bash_aliases
+    owner: root:root
+    permissions: '0744'
+    content: |
+      # bash aliases
+      alias ll='ls -Al'
+      alias ..='cd .. ; pwd'
+  - path: /etc/skel/.vimrc
+    owner: root:root
+    permissions: '0744'
+    content: |
+      set mouse=
+  - path: /opt/environment.sh
+    owner: root:root
+    permissions: '0755'
+    content: |
+      #!/bin/bash
+      export BILLING_ID="${billing_id}"
+      export RDS_DNS_NAME="${rds_dns_name}"
+
+# Run commands on first boot
+runcmd:
+  - find /etc/skel -type f -exec cp -v {} /home/admin/ \;
+  - chown -Rh admin:admin /home/admin ; chmod 750 /home/admin
+  - HOSTNAME="debian"$(lsb_release --short --release 2>/dev/null) ; echo "$HOSTNAME" > /etc/hostname ; hostname --boot $HOSTNAME ; hostnamectl set-hostname $HOSTNAME
+  - ln -s /opt/environment.sh /etc/profile.d/environment.sh
