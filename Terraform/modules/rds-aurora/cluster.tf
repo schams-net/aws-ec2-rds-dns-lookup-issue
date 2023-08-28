@@ -24,7 +24,7 @@ resource "aws_rds_cluster" "default" {
     database_name = replace(lower(var.tags.name), "/[^a-z0-9]/", "")
 
     # If true, a final DB snapshot is created before the DB cluster is deleted.
-    skip_final_snapshot = false
+    skip_final_snapshot = true
 
     serverlessv2_scaling_configuration {
         # The minimum capacity for an Aurora DB cluster in provisioned DB engine mode.
