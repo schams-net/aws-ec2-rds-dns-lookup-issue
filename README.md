@@ -216,6 +216,8 @@ QUERIES=100 ; ERRORS=0 ; echo ; for COUNT in $(seq 1 ${QUERIES}); do IP_ADDRESS=
 
 ## Use a Different DNS Server
 
+> Note: It is not certain whether the following changes take effect (see output of the command `resolvectl status`).
+
 Replace the symbolic `/etc/resolv.conf` with a file that changes the DNS servers to Google's DNS:
 
 ```console
@@ -247,6 +249,8 @@ $ sudo ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
 Restart the systemd services as outlined above.
 
 ## Disable Local DNS Cache
+
+> Note: It is not certain whether the following changes take effect (see output of the command `resolvectl status`).
 
 Disabling the local DNS cache does not make any differences either as the following commands prove.
 
