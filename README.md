@@ -261,6 +261,38 @@ $ echo -e "[Resolve]\nCache=no" | sudo tee /etc/systemd/resolved.conf.d/dns.conf
 
 Restart the systemd services as outlined in the previous section.
 
+## Monitor DNS Queries
+
+Previous tests point to the nss stack of Debian v12 (where `systemd-resolved` is involved by way of `libnss_resolve.so`). The following command monitors the DNS queries and writes the communication between the EC2 instance and the AWS' DNS into a file:
+
+```console
+$ sudo resolvectl monitor > /tmp/resolvectl.monitor.log &
+```
+
+Now run the tests again (see section above). Once finished, bring the `resolvectl monitor` process to the foreground:
+
+```console
+$ fg
+```
+
+Press `CTRL`+`c` to stop the query monitoring. The file `/tmp/resolvectl.monitor.log` contains the results. Run the following command to output the status of the queries where the status is not "`success`":
+
+```console
+$ cat /tmp/resolvectl.monitor.log | egrep "S: " | grep -v success
+```
+
+The number of lines matches the number of errors that occurred during the test. Investigate the file `/tmp/resolvectl.monitor.log` further:
+
+```text
+→ Q: <rds-aurora-endpoint> IN A
+→ Q: <rds-aurora-endpoint> IN AAAA
+← S: EINVAL
+← A: <rds-aurora-endpoint> IN CNAME <...>
+← A: <...> IN A <rds-aurora-ip>
+```
+
+Note the status `EINVAL` sent from the DNS.
+
 ## Bypass DNS Look-up
 
 The actions described in this section address the issue but don't solve the root cause of the problem. As the IP address of the RDS Aurora cluster can change at any time, storing the IP address hard-coded in the system is not a solution and can lead to system failures.
