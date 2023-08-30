@@ -60,6 +60,7 @@ resource "aws_security_group" "ec2" {
         to_port = 3306
         protocol = "tcp"
         cidr_blocks = var.subnets[*].cidr_block
+        ipv6_cidr_blocks = var.subnets[*].ipv6_cidr_block
     }
 
     egress {

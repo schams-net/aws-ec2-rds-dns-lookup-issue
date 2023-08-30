@@ -9,6 +9,7 @@ resource "aws_rds_cluster" "default" {
     engine_mode = "provisioned"
 
     availability_zones = var.subnets[*].availability_zone
+    network_type = "DUAL"
 
     lifecycle {
         ignore_changes = [ availability_zones ]
