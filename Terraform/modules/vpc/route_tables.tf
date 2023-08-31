@@ -8,6 +8,10 @@ resource "aws_route_table" "public" {
         cidr_block = "0.0.0.0/0"
         gateway_id = aws_internet_gateway.default.id
     }
+    route {
+        ipv6_cidr_block = "::/0"
+        egress_only_gateway_id = aws_egress_only_internet_gateway.default.id
+    }
     tags = merge(var.tags, {
         Name = "[${var.tags.name}] public subnets"
     })
