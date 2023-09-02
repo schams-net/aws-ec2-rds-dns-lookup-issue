@@ -20,7 +20,7 @@ The details below outline how to reproduce the problem in a basic environment an
 The following actions have been taken to analyse the issue:
 
 - Rule out [VPC DNS throttling](docs/vpc-dns-throttling.md)
-- [Package capture](docs/package-capture.md)
+- [Packet capture](docs/packet-capture.md)
 - [Monitor DNS queries](docs/monitor-dns-queries.md)
 - [IPv6 address resolution](docs/ipv6-address-resolution.md)
 
