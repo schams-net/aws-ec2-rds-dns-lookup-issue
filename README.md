@@ -12,33 +12,33 @@ The details below outline how to reproduce the problem in a basic environment an
 
 # Prerequisites
 
-- [How to reproduce the issue](how-to-reproduce-the-issue.md)
-- [Terraform plan](terraform-plan.md) to deploy an environment for reproducing the issue
+- [How to reproduce the issue](docs/how-to-reproduce-the-issue.md)
+- [Terraform plan](docs/terraform-plan.md) to deploy an environment for reproducing the issue
 
 ## Analysis
 
 The following actions have been taken to analyse the issue:
 
-- Rule out [VPC DNS throttling](vpc-dns-throttling.md)
-- [Package capture](package-capture.md)
-- [Monitor DNS queries](monitor-dns-queries.md)
-- [IPv6 address resolution](ipv6-address-resolution.md)
+- Rule out [VPC DNS throttling](docs/vpc-dns-throttling.md)
+- [Package capture](docs/package-capture.md)
+- [Monitor DNS queries](docs/monitor-dns-queries.md)
+- [IPv6 address resolution](docs/ipv6-address-resolution.md)
 
 ## Actions without Effect
 
 The following actions **do not** solve the issue:
 
-- [Disable ENA support](disable-ena-support.md)
+- [Disable ENA support](docs/disable-ena-support.md)
 
 ## Workarounds
 
 The following actions address prevent the look-up failures from happening (but do not solve the issue):
 
-- Write the IP addresses into the file `/etc/hosts` (see [further details](etc-hosts.md)).
-- Stop and disable the `systemd-resolved` service (see [further details](disable-systemd-resolved.md)).
+- Write the IP addresses into the file `/etc/hosts` (see [further details](docs/etc-hosts.md)).
+- Stop and disable the `systemd-resolved` service (see [further details](docs/disable-systemd-resolved.md)).
 
 ## Miscellaneous
 
-- [Query name servers](query-name-servers.md)
-- Use a [different DNS server](different-dns-server.md)
-- [Disable Local DNS Cache](disable-local-dns-cache.md)
+- [Query name servers](docs/query-name-servers.md)
+- Use a [different DNS server](docs/different-dns-server.md)
+- [Disable Local DNS Cache](docs/disable-local-dns-cache.md)
