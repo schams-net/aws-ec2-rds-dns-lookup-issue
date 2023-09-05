@@ -1,5 +1,9 @@
 # Global output variables
 
+output "s3_bucket" {
+    value = "s3://${module.aws_s3.s3_bucket.bucket}"
+}
+
 output "debian_amis" {
     value = {
         debian11 = module.aws_ec2.amis.debian11.id

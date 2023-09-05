@@ -30,3 +30,19 @@ module "aws_rds" {
     subnets = module.aws_vpc.subnets.public
     tags = var.tags
 }
+
+# Amazon Simple Object Storage (S3)
+module "aws_s3" {
+    source = "./modules/s3"
+    random_identifier = random_id.identifier
+    tags = var.tags
+}
+
+# Amazon Route 53
+module "aws_route53" {
+    source = "./modules/route53"
+     vpc = module.aws_vpc.vpc
+    subnets = module.aws_vpc.subnets.public
+    s3_bucket = module.aws_s3.s3_bucket
+    tags = var.tags
+}
