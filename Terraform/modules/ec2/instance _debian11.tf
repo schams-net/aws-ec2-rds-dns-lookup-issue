@@ -21,19 +21,19 @@ resource "aws_instance" "debian11" {
         encrypted = true
         delete_on_termination = true
         tags = merge(var.tags, {
-            Name = "[${var.tags.name}] debian11"
+            Name = "[${var.tags.name}] Debian GNU/Linux v11"
         })
     }
 
     tags = merge(var.tags, {
-        Name = "[${var.tags.name}] debian11"
+        Name = "[${var.tags.name}] Debian GNU/Linux v11"
     })
 }
 
 resource "aws_ec2_tag" "network_interface_debian11_name" {
     resource_id = aws_instance.debian11.primary_network_interface_id
     key = "Name"
-    value = "[${var.tags.name}] debian11"
+    value = "[${var.tags.name}] Debian GNU/Linux v11"
 }
 
 resource "aws_ec2_tag" "network_interface_debian11_billing_id" {
