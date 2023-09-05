@@ -10,7 +10,7 @@ resource "aws_rds_cluster_instance" "default" {
     instance_class = "db.serverless"
     engine = aws_rds_cluster.default.engine
     engine_version = aws_rds_cluster.default.engine_version
-    #ca_cert_identifier = "rds-ca-2019"
+    auto_minor_version_upgrade = true
     ca_cert_identifier = "rds-ca-rsa2048-g1"
 
     publicly_accessible = false
