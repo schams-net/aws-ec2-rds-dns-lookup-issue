@@ -46,3 +46,17 @@ module "aws_route53" {
     s3_bucket = module.aws_s3.s3_bucket
     tags = var.tags
 }
+
+# Amazon CloudWatch
+module "aws_cloudwatch" {
+    source = "./modules/cloudwatch"
+    ec2_instances = module.aws_ec2.instances
+    sns_topics = module.aws_sns.topics
+    tags = var.tags
+}
+
+# Amazon Simple Notification Service (SNS)
+module "aws_sns" {
+    source = "./modules/sns"
+    tags = var.tags
+}
