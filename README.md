@@ -38,7 +38,7 @@ The following actions prevent the look-up failures from happening (but do not so
 
 - Write the IP addresses into the file `/etc/hosts` (see [further details](docs/etc-hosts.md)).
 - Stop and disable the `systemd-resolved` service (see [further details](docs/disable-systemd-resolved.md)).
-- Remove `resolve` from the file `nsswitch.conf` (see [further details](ddocs/etc-nsswitch-conf.md)).
+- Remove `resolve` from the file `/etc/nsswitch.conf` (see [further details](docs/etc-nsswitch-conf.md)).
 
 ## Miscellaneous
 
