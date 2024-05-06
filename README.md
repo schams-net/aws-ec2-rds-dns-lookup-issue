@@ -1,5 +1,7 @@
 # AWS EC2 RDS DNS Look-up Issue
 
+> Important note: Be aware that the cloud images `debian-12-amd64-20240415-1718` and newer no longer enable `libnss-resolve` by default. This issue described in this document has been mitigated in EC2 instances launched from these and future images. See [issue 29069](https://github.com/systemd/systemd/issues/29069) (mainly the [comments](https://github.com/systemd/systemd/issues/29069#issuecomment-2057781457) on 16 April 2024 and later) of the `systemd` GitHub repository for further details.
+
 ## Problem Description
 
 EC2 instances with Debian v12 show intermittent DNS name resolution failures when they perform a DNS look-up of the RDS Aurora endpoint. The instances use the Amazon-provided DNS server (`VPC.2`). While approx. 90 percent of the DNS queries succeed, 10 percent fail (*name or service not known*).
