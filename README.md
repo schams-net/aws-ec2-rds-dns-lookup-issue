@@ -32,10 +32,11 @@ The following actions **do not** solve the issue:
 
 ## Workarounds
 
-The following actions address prevent the look-up failures from happening (but do not solve the issue):
+The following actions prevent the look-up failures from happening (but do not solve the issue):
 
 - Write the IP addresses into the file `/etc/hosts` (see [further details](docs/etc-hosts.md)).
 - Stop and disable the `systemd-resolved` service (see [further details](docs/disable-systemd-resolved.md)).
+- Remove `resolve` from the file `nsswitch.conf` (see [further details](ddocs/etc-nsswitch-conf.md)).
 
 ## Miscellaneous
 
