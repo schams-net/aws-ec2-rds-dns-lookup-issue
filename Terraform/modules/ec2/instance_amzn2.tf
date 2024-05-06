@@ -25,6 +25,10 @@ resource "aws_instance" "amzn2" {
         })
     }
 
+    lifecycle {
+        ignore_changes = [ associate_public_ip_address ]
+    }
+
     tags = merge(var.tags, {
         Name = "[${var.tags.name}] Amazon Linux 2"
     })

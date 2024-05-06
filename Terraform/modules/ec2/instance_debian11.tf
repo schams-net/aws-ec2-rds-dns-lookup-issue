@@ -25,6 +25,10 @@ resource "aws_instance" "debian11" {
         })
     }
 
+    lifecycle {
+        ignore_changes = [ associate_public_ip_address ]
+    }
+
     tags = merge(var.tags, {
         Name = "[${var.tags.name}] Debian GNU/Linux v11"
     })
